@@ -1,0 +1,15 @@
+<html>
+  <head>
+    <title>{% block title %} My Page {% endblock %}</title>
+  </head>
+
+  <body>
+    <nav>
+      <a href={% url 'index' %}>Home Page</a>
+      <a href={% url 'income' %}>Income</a>
+      <a href={% url 'expenses' %}>Expenses</a>
+      <a href={% url 'summary' %}>Summary</a>
+    </nav>
+    {% block content %} content {% endblock %}
+  </body>
+</html>
