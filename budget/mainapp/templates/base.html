@@ -1,10 +1,13 @@
+{% load static %}
+
 <html>
   <head>
     <title>{% block title %} My Page {% endblock %}</title>
+    <link rel="stylesheet" href={% static 'style.css' %}/>
   </head>
 
   <body>
-    <nav>
+    <nav class="navbar">
       <a href={% url 'index' %}>Home Page</a>
       <a href={% url 'income' %}>Income</a>
       <a href={% url 'expenses' %}>Expenses</a>
