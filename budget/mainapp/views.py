@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import Expense, Income
 from .forms import ExpenseForm, IncomeForm
+from .charts import income_chart
 
 def index(request):
   return render(request, 'index.html')
@@ -42,4 +43,5 @@ def add_expense(request):
     return render(request, 'expenses.html', {'form': form})
 
 def summary(request):
-  return render(request, 'summary.html')
+  graphic = income_chart(request)
+  return render(request, 'summary.html', {'graphic': graphic})
