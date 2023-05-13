@@ -11,7 +11,6 @@ class Income(models.Model):
   amount = models.FloatField()
   date = models.DateField(auto_now_add = True)
   description = models.CharField(max_length=100)
-  category = models.ForeignKey(Category, on_delete=models.CASCADE)
 
   def __str__(self) -> str:
     return f'{self.amount}$ for {self.description}'
