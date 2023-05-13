@@ -1,4 +1,4 @@
 {% extends 'base.html' %}
 
 {% block title %} Summary {% endblock %}
-{% block content %} <img src="data:image/png;base64,{{ graphic }}" alt="income chart"/> {% endblock %}
+{% block content %} {{ chart|safe }} {% endblock %}

@@ -1,25 +1,40 @@
-import matplotlib.pyplot as plt
-from .models import Income
-from io import BytesIO
-import base64
+import plotly.graph_objs as go
+import plotly.offline as opy
+from django.db.models import Sum
+from datetime import datetime, timedelta
 
-def income_chart(request):
-  colors = ['blue']
-  plt.rcParams['axes.prop_cycle'] = plt.cycler(color=colors)
-  
-  incomes = Income.objects.all()
+from .models import Income, Expense
 
-  dates = [income.date for income in incomes]
-  amounts = [income.amount for income in incomes]
+def generate_chart():
+    # Get the start and end dates for the chart
+    end_date = datetime.today().date()
+    start_date = end_date - timedelta(days=30)
 
-  plt.plot(dates, amounts)
-  plt.title('Income over time')
-  plt.xlabel('Date')
-  plt.ylabel('Amount')
+    income_transactions = Income.objects.filter(
+        date__gte=start_date,
+        date__lte=end_date
+    )
+    expense_transactions = Expense.objects.filter(
+        date__gte=start_date,
+        date__lte=end_date
+    )
 
-  buffer = BytesIO()
-  plt.savefig(buffer, format='png')
-  buffer.seek(0)
-  image_png = buffer.getvalue()
-  buffer.close()
-  return base64.b64encode(image_png).decode('utf-8')
+    # Calculate the total income amount
+    total_income = sum(transaction.amount for transaction in income_transactions)
+
+    # Group the expense transactions by category and calculate the total amount for each category
+    expense_by_category = expense_transactions.values('category__name').annotate(total_amount=Sum('amount'))
+
+    # Create the Plotly chart
+    data = [
+        go.Bar(x=['Income'], y=[total_income], name="Income")
+    ]
+    for expense in expense_by_category:
+        data.append(
+            go.Bar(x=['Expenses'], y=[expense['total_amount']], name=expense['category__name'])
+        )
+
+    layout = go.Layout(title=dict(text='Income vs Expense by Category', x=0.5), yaxis=dict(title='Amount'))
+    chart = opy.plot({'data': data, 'layout': layout}, auto_open=False, output_type='div')
+    print(data)
+    return chart
