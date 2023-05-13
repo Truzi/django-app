@@ -1,4 +1,11 @@
 {% extends 'base.html' %}
 
 {% block title %} Summary {% endblock %}
-{% block content %} {{ chart|safe }} {% endblock %}
+{% block content %} 
+
+  <form>
+    {{ form.as_div }}
+    <button type="submit">Check</submit>
+  </form>
+
+{% endblock %}

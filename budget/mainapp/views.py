@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Expense, Income
-from .forms import ExpenseForm, IncomeForm
+from .forms import ChartForm, ExpenseForm, IncomeForm
 from .charts import generate_chart
 import plotly.offline as opy
 
@@ -42,5 +42,9 @@ def add_expense(request):
     return render(request, 'expenses.html', {'form': form})
 
 def summary(request):
-  chart = generate_chart()
-  return render(request, 'summary.html', {'chart': chart})
+  form = ChartForm()
+  return render(request, 'summary.html', {'form': form})
+  
+  # elif request.method == 'POST':
+  #   chart = generate_chart(context=request.POST)
+  #   return render(request, 'summary.html', {'chart': chart})

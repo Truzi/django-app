@@ -5,18 +5,14 @@ from datetime import datetime, timedelta
 
 from .models import Income, Expense
 
-def generate_chart():
-  # Get the start and end dates for the chart
-  end_date = datetime.today().date()
-  start_date = end_date - timedelta(days=30)
-
+def generate_chart(context):
   income_transactions = Income.objects.filter(
-      date__gte=start_date,
-      date__lte=end_date
+      date__gte = context['start_date'],
+      date__lte = context['end_date']
   )
   expense_transactions = Expense.objects.filter(
-      date__gte=start_date,
-      date__lte=end_date
+      date__gte = context['start_date'],
+      date__lte = context['end_date']
   )
 
   # Calculate the total income amount
