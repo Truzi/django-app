@@ -4,7 +4,7 @@ from .models import Expense, Income
 class IncomeForm(forms.ModelForm):
   class Meta:
     model = Income
-    fields = ['amount', 'description', 'category']
+    fields = ['amount', 'description']
 
 class ExpenseForm(forms.ModelForm):
   class Meta:
