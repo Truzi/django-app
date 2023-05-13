@@ -1,7 +1,6 @@
 import plotly.graph_objs as go
 import plotly.offline as opy
 from django.db.models import Sum
-from datetime import datetime, timedelta
 
 from .models import Income, Expense
 
