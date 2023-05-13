@@ -9,7 +9,7 @@ class Category(models.Model):
 
 class Income(models.Model):
   amount = models.FloatField()
-  date = models.DateField(auto_now_add = True)
+  date = models.DateField()
   description = models.CharField(max_length=100)
 
   def __str__(self) -> str:
@@ -17,7 +17,7 @@ class Income(models.Model):
   
 class Expense(models.Model):
   amount = models.FloatField()
-  date = models.DateField(auto_now_add = True)
+  date = models.DateField()
   description = models.CharField(max_length=100)
   category = models.ForeignKey(Category, on_delete=models.CASCADE)
 
