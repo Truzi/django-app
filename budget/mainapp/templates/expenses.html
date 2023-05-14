@@ -18,7 +18,10 @@
           <td>{{ expense.description }}</td>
           <td>{{ expense.category }}</td>
           <td>{{ expense.date }}</td>
-          <td><form action={% url 'remove_item' %} method="post"><button type="submit" value={{ expense.id }}>X</button></form></td>
+          <td><form action={% url 'remove_item' %} method="post">
+            {% csrf_token %}
+            <button type="submit" name='expense'  value={{ expense.id }}>X</button>
+          </form></td>
         </tr>
       {% endfor %}
     </table>
