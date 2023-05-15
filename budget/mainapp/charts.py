@@ -4,14 +4,14 @@ from django.db.models import Sum
 
 from .models import Income, Expense
 
-def generate_chart(context):
+def generate_chart(start_date, end_date):
   income_transactions = Income.objects.filter(
-      date__gte = context['start_date'],
-      date__lte = context['end_date']
+      date__gte = start_date,
+      date__lte = end_date
   )
   expense_transactions = Expense.objects.filter(
-      date__gte = context['start_date'],
-      date__lte = context['end_date']
+      date__gte = start_date,
+      date__lte = end_date
   )
 
   # Calculate the total income amount

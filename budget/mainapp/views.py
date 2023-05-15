@@ -13,40 +13,47 @@ def income(request):
   form = IncomeForm()
   return render(request, 'income.html', {'form': form, 'incomes': incomes})
 
+def expenses(request):
+  expenses = Expense.objects.all()
+  form = ExpenseForm()
+  return render(request, 'expenses.html', {'form': form, 'expenses': expenses})
+
+def summary(request):
+  form = ChartForm()
+
+  if request.method == 'POST':
+    start_date = request.POST.get('start_date')
+    end_date = request.POST.get('end_date')
+    chart = generate_chart(start_date, end_date)
+    
+    return render(request, 'summary.html', {'form': form, 'chart': chart})
+  
+  else:
+    return render(request, 'summary.html', {'form': form})
+  
+
 def add_income(request):
   if request.method == 'POST':
     form = IncomeForm(request.POST)
     if form.is_valid():
       form.save()
-      
       form = IncomeForm()
       return redirect('income')
   else:
     form = IncomeForm()
     return render(request, 'income.html', {'form': form})
 
-def expenses(request):
-  expenses = Expense.objects.all()
-  form = ExpenseForm()
-  return render(request, 'expenses.html', {'form': form, 'expenses': expenses})
-
 def add_expense(request):
   if request.method == 'POST':
     form = ExpenseForm(request.POST)
     if form.is_valid():
       form.save()
-      
       form = ExpenseForm()
       return redirect('expenses')
   else:
     form = ExpenseForm()
     return render(request, 'expenses.html', {'form': form})
 
-def summary(request):
-  form = ChartForm()
-  return render(request, 'summary.html', {'form': form})
-  
-  
 def remove_item(request):
   if request.method == 'POST':
     if 'expense' in request.POST:
@@ -68,7 +75,3 @@ def remove_item(request):
     
     else:
       redirect('')
-    
-  # elif request.method == 'POST':
-  #   chart = generate_chart(context=request.POST)
-  #   return render(request, 'summary.html', {'chart': chart})
