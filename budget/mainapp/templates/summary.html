@@ -3,9 +3,16 @@
 {% block title %} Summary {% endblock %}
 {% block content %} 
 
-  <form>
+  <form action={% url 'summary' %} method="post">
+    {% csrf_token %}
     {{ form.as_div }}
-    <button type="submit">Check</submit>
+    <input type="submit" value="Check"> <!-- input type submit instead of button submit, because it was affecting plotly chart -->
   </form>
+
+  {% if chart %}
+
+    {{ chart|safe }}
+
+  {% endif %}
 
 {% endblock %}
