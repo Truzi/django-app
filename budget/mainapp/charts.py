@@ -1,6 +1,7 @@
 import plotly.graph_objs as go
 import plotly.offline as opy
 from django.db.models import Sum
+from random import randint as rand
 
 from .models import Category, Expense, Income
 
@@ -27,11 +28,11 @@ def generate_chart(start_date, end_date):
   for item in expense_transactions:
     category_name = Category.objects.get(pk=item['category']).name
     amount = item['total_amount']
-    marker = 'rgba({r}, {g}, 50, 1)'.format(r=item['category']%2*120, g=item['category']%2*10)
+    marker_color = f'rgba({rand(0, 255)}, {rand(0, 255)}, {rand(0, 255)}, 1)'
     data.append(
       go.Bar(x=['Expense'], y=[amount], name=category_name,
         hovertext=f'{category_name} - {amount}' , hoverinfo='text',
-        marker=dict(color=marker,
+        marker=dict(color=marker_color,
         line=dict(color='rgba(55, 128, 161, 1.0)', width=1)))
     )
 
