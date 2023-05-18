@@ -87,3 +87,7 @@ th, td {
   padding: 5px;
   background-color: #4c87e6;
 }
+
+.form > button:hover, .form > input[type="submit"]:hover {
+  cursor: pointer;
+}
