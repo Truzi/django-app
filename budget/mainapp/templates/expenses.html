@@ -5,14 +5,17 @@
 
   <div>
     <table>
-      <tr>
-        <th>Amount</th>
-        <th>Description</th>
-        <th>Category</th>
-        <th>Date</th>
-        <th></th>
-      </tr>
+      <thead>
+        <tr>
+          <th>Amount</th>
+          <th>Description</th>
+          <th>Category</th>
+          <th>Date</th>
+          <th></th>
+        </tr>
+      </thead>
       {% for expense in expenses %}
+      <tbody>
         <tr>
           <td>{{ expense.amount }}</td>
           <td>{{ expense.description }}</td>
@@ -20,9 +23,10 @@
           <td>{{ expense.date }}</td>
           <td><form action={% url 'remove_item' %} method="post">
             {% csrf_token %}
-            <button type="submit" name='expense'  value={{ expense.id }}>X</button>
+            <button type="submit" name='expense'  value={{ expense.id }} class="remove_item">X</button>
           </form></td>
         </tr>
+      </tbody>
       {% endfor %}
     </table>
   </div>

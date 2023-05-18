@@ -2,6 +2,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  font-family:Georgia, 'Times New Roman', Times, serif;
 }
 
 body {
@@ -37,4 +38,35 @@ body {
   width: 30%;
   margin: 10px auto;
   text-align: justify;
+}
+
+table {
+  width: 30vw;
+  text-align: center;
+  border-collapse: collapse;
+}
+
+thead {
+  background-color: #3274df;
+}
+
+th, td {
+  padding: 10px 20px;
+  border: 1px solid;
+}
+
+.remove_item {
+  background-color: #e04949;
+  width: 30px;
+  height: 30px;
+  padding: 5px;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  border: 0;
+  border-radius: 10px;
+}
+
+.remove_item:hover {
+  cursor: pointer;
 }
