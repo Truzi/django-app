@@ -29,10 +29,10 @@
     </table>
   </div>
   
-  <div>
-    <form action={% url 'add_income' %} method="post">
+  <div class="form-container">
+    <form class="form" action={% url 'add_income' %} method="post">
       {% csrf_token %}
-      {{ form.as_div }}
+      {{ form }}
       <button type="submit">Add Income</button>
     </form>
   </div>

@@ -31,10 +31,10 @@
     </table>
   </div>
 
-  <div>
-    <form action={% url 'add_expense' %} method="post">
+  <div class="form-container">
+    <form class="form" action={% url 'add_expense' %} method="post">
       {% csrf_token %}
-      {{ form.as_div }}
+      {{ form }}
       <button type="submit">Add Expense</button>
     </form>
   </div>

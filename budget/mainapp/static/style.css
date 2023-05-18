@@ -47,7 +47,7 @@ table {
 }
 
 thead {
-  background-color: #3274df;
+  background-color: #4c87e6;
 }
 
 th, td {
@@ -69,4 +69,21 @@ th, td {
 
 .remove_item:hover {
   cursor: pointer;
+}
+
+.form * {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form > * {
+  margin: 10px;
+  width: 100%;
+}
+
+.form > button, .form > input[type="submit"] {
+  border: 0;
+  padding: 5px;
+  background-color: #4c87e6;
 }
