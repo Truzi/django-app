@@ -3,6 +3,7 @@
 {% block title %} Expenses {% endblock %}
 {% block content %} 
 
+  {% if expenses %}
   <div>
     <table>
       <thead>
@@ -30,6 +31,7 @@
       {% endfor %}
     </table>
   </div>
+  {% endif %}
 
   <div class="form-container">
     <form class="form" action={% url 'add_expense' %} method="post">

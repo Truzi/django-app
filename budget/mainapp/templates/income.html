@@ -3,6 +3,7 @@
 {% block title %} Income Page {% endblock %}
 {% block content %}
   
+  {% if incomes %}
   <div>
     <table>
       <thead>
@@ -28,6 +29,7 @@
       {% endfor %}
     </table>
   </div>
+  {% endif %}
   
   <div class="form-container">
     <form class="form" action={% url 'add_income' %} method="post">
