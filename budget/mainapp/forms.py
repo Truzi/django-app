@@ -11,6 +11,6 @@ class ExpenseForm(forms.ModelForm):
     model = Expense
     fields = ['amount', 'description', 'category', 'date']
     
-class ChartForm(forms.Form):
+class DateForm(forms.Form):
   start_date = forms.DateField(label = "Start Date")
   end_date = forms.DateField(label = "End Date")
