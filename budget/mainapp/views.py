@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Expense, Income
-from .forms import ChartForm, ExpenseForm, IncomeForm
+from .forms import DateForm, ExpenseForm, IncomeForm
 from .charts import generate_chart
 import plotly.offline as opy
 from django.core.exceptions import ObjectDoesNotExist
@@ -9,9 +9,17 @@ def index(request):
   return render(request, 'index.html')
 
 def income(request):
-  incomes = Income.objects.all()
-  form = IncomeForm()
-  return render(request, 'income.html', {'form': form, 'incomes': incomes})
+  if request.method == 'POST':
+    incomes = Income.objects.filter(
+      date__gte = request.POST.get('start_date'),
+      date__lte = request.POST.get('end_date')
+    )
+  print(type(request.POST.get('start_date')), request.POST.get('end_date'))
+  print(incomes)
+  print(Income.objects.all()[0].date)
+  incomeForm = IncomeForm()
+  dateForm = DateForm()
+  return render(request, 'income.html', {'incomeForm': incomeForm, 'dateForm': dateForm, 'incomes': incomes})
 
 def expenses(request):
   expenses = Expense.objects.all()
@@ -19,7 +27,7 @@ def expenses(request):
   return render(request, 'expenses.html', {'form': form, 'expenses': expenses})
 
 def summary(request):
-  form = ChartForm()
+  form = DateForm()
 
   if request.method == 'POST':
     start_date = request.POST.get('start_date')
