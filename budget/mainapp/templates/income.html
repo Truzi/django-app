@@ -3,6 +3,12 @@
 {% block title %} Income Page {% endblock %}
 {% block content %}
   
+  <form action={% url 'income' %} method='POST'>
+    {% csrf_token %}
+    {{ dateForm }}
+    <button type="submit" name='date'>select range</button>
+  </form>
+
   {% if incomes %}
   <div>
     <table>
@@ -34,7 +40,7 @@
   <div class="form-container">
     <form class="form" action={% url 'add_income' %} method="post">
       {% csrf_token %}
-      {{ form }}
+      {{ incomeForm }}
       <button type="submit">Add Income</button>
     </form>
   </div>
