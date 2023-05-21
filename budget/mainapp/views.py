@@ -9,22 +9,30 @@ def index(request):
   return render(request, 'index.html')
 
 def income(request):
+  incomes = {}
+
   if request.method == 'POST':
     incomes = Income.objects.filter(
       date__gte = request.POST.get('start_date'),
       date__lte = request.POST.get('end_date')
-    )
-  print(type(request.POST.get('start_date')), request.POST.get('end_date'))
-  print(incomes)
-  print(Income.objects.all()[0].date)
+    )[:10]
+
   incomeForm = IncomeForm()
   dateForm = DateForm()
   return render(request, 'income.html', {'incomeForm': incomeForm, 'dateForm': dateForm, 'incomes': incomes})
 
 def expenses(request):
-  expenses = Expense.objects.all()
-  form = ExpenseForm()
-  return render(request, 'expenses.html', {'form': form, 'expenses': expenses})
+  expenses = {}
+
+  if request.method == 'POST':
+    expenses = Expense.objects.filter(
+      date__gte = request.POST.get('start_date'),
+      date__lte = request.POST.get('end_date')
+    )[:10]
+
+  expenseForm = ExpenseForm()
+  dateForm = DateForm()
+  return render(request, 'expenses.html', {'expenseForm': expenseForm, 'dateForm': dateForm, 'expenses': expenses})
 
 def summary(request):
   form = DateForm()
