@@ -15,6 +15,9 @@ class Income(models.Model):
   def __str__(self) -> str:
     return f'{self.amount}$ for {self.description}'
   
+  def formatted_date(self):
+    return self.my_date.strftime("%Y-%m-%d")
+  
 class Expense(models.Model):
   amount = models.FloatField()
   date = models.DateField()
@@ -23,3 +26,6 @@ class Expense(models.Model):
 
   def __str__(self) -> str:
     return f'{self.amount}$ for {self.description}'
+  
+  def formatted_date(self):
+    return self.my_date.strftime("%Y-%m-%d")
