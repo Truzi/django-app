@@ -3,11 +3,13 @@
 {% block title %} Expenses {% endblock %}
 {% block content %} 
 
-  <form action={% url 'expenses' %} method='POST'>
-    {% csrf_token %}
-    {{ dateForm }}
-    <button type="submit" name='date'>select range</button>
-  </form>
+  <div class="form-container">
+    <form class="form" action={% url 'expenses' %} method='POST'>
+      {% csrf_token %}
+      {{ dateForm }}
+      <button type="submit" name='date'>select range</button>
+    </form>
+  </div>
 
   {% if expenses %}
   <div>
