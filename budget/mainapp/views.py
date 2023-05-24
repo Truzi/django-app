@@ -9,7 +9,7 @@ def index(request):
   return render(request, 'index.html')
 
 def income(request):
-  incomes = {}
+  incomes = Income.objects.all()[:10]  # showing last 10 records if date not specified
 
   if request.method == 'POST':
     incomes = Income.objects.filter(
@@ -22,7 +22,7 @@ def income(request):
   return render(request, 'income.html', {'incomeForm': incomeForm, 'dateForm': dateForm, 'incomes': incomes})
 
 def expenses(request):
-  expenses = {}
+  expenses = Expense.objects.all()[:10]  # showing last 10 records if date not specified
 
   if request.method == 'POST':
     expenses = Expense.objects.filter(
