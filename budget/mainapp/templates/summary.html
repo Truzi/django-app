@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %} Summary {% endblock %}
+{% block content %} 
+
+  {% if chart %}
+
+    {{ chart|safe }}
+
+  {% endif %}
+
+  <div class="form-container">
+    <form class="form" action={% url 'summary' %} method="post">
+      {% csrf_token %}
+      {{ form }}
+      <input type="submit" value="Check"> <!-- input type submit instead of button submit, because it was affecting plotly chart -->
+    </form>
+  </div>
+
+{% endblock %}

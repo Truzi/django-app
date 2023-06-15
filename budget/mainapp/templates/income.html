@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block title %} Income Page {% endblock %}
+{% block content %}
+  
+  <div class="form-container">
+    <form class="form" action={% url 'income' %} method='POST'>
+      {% csrf_token %}
+      {{ dateForm }}
+      <button type="submit" name='date'>select range</button>
+    </form>
+  </div>
+
+  {% if incomes %}
+  <div>
+    <table>
+      <thead>
+        <tr>
+          <th>Amount</th>
+          <th>Description</th>
+          <th>Date</th>
+          <th></th>
+        </tr>
+      </thead>
+      {% for income in incomes %}
+      <tbody>
+        <tr>
+          <td>{{ income.amount }}</td>
+          <td>{{ income.description }}</td>
+          <td>{{ income.date }}</td>
+          <td><form action={% url 'remove_item' %} method="post">
+            {% csrf_token %}
+            <button type="submit" name='income' value={{ income.id }} class="remove_item">X</button>
+          </form></td>
+        </tr>
+      </tbody>
+      {% endfor %}
+    </table>
+  </div>
+  {% endif %}
+  
+  <div class="form-container">
+    <form class="form" action={% url 'add_income' %} method="post">
+      {% csrf_token %}
+      {{ incomeForm }}
+      <button type="submit">Add Income</button>
+    </form>
+  </div>
+    
+{% endblock %}

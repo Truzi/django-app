@@ -1,0 +1,19 @@
+{% load static %}
+
+<html>
+  <head>
+    <title>{% block title %} My Page {% endblock %}</title>
+    <link rel="stylesheet" href={% static 'style.css' %}/>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  </head>
+
+  <body>
+    <nav class="navbar">
+      <a href={% url 'index' %}>Home Page</a>
+      <a href={% url 'income' %}>Income</a>
+      <a href={% url 'expenses' %}>Expenses</a>
+      <a href={% url 'summary' %}>Summary</a>
+    </nav>
+    {% block content %} content {% endblock %}
+  </body>
+</html>
